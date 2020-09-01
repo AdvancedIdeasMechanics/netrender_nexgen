@@ -33,6 +33,13 @@ bl_info = {
 
 import bpy, os, sys, logging
 
+# To support reload properly, try to access a package var, if it's there, reload everything
+if "init_data" in locals():
+    import importlib
+    importlib.reload(ui)
+else:
+    from . import ui
+
 jobs = []
 workers = []
 disallow = []
